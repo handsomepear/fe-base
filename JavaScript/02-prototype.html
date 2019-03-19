@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // prototype(显式原型) 只有函数才有这个属性 基本上所有的函数都有这个属性 只有下面这个例外
+      let fun = Function.prototype.bind()
+      console.dir(fun)
+
+      function Foo() {}
+      console.dir(Foo) // prototype: {constructor: ƒ}
+      // __proto__（隐式原型）指向的是自己的创建者的prototype
+
+      // function 只是 new Function的语法糖
+      /*
+      // new 的过程
+      1. 新创建一个对象
+      2. 将原型指向这个对象
+      3. 绑定this作用域
+      4. 返回新对象
+    */
+
+      // 自己是想new
+      function create() {
+        // 1. 创建一个空对象
+        let obj = new Object()
+        // 获得构造函数
+        // let Con = Array.from(arguments)[0]
+        let Con = [].shift.call(arguments)
+        // 链接到原型
+        Con.prototype = obj.__proto__ 
+        // 绑定this 执行构造函数
+        let result = Con.apply(obj, arguments)
+        return typeof result === 'object' ? result : obj
+      }
+      function demo(name) {
+        this.name = name
+      }
+      const oDemo = create(demo, '123')
+      console.log(oDemo)
+      //
+      console.log(Function.__proto__ === Function.prototype) // true
+      // 引擎自己创建了 Object.prototype 和 Function.prototype 并且用 __proto__ 将两者联系了起来
+      console.dir(Function.prototype) // __proto__ 指向了Object.prototype
+
+      /*
+        Object 是所有对象的爸爸，所有对象都可以通过 __proto__ 找到它
+        Function 是所有函数的爸爸，所有函数都可以通过 __proto__ 找到它
+        Function.prototype 和 Object.prototype 是两个特殊的对象，他们由引擎来创建
+        除了以上两个特殊对象，其他对象都是通过构造器 new 出来的
+        函数的 prototype 是一个对象，也就是原型
+        对象的 __proto__ 指向原型， __proto__ 将对象和原型连接起来组成了原型链
+      */
+
+      // new 运算符优先级
+      function Foo(){
+        return this
+      }
+      Foo.getName = function(){
+        console.log(1)
+      }
+      Foo.prototype.getName = function(){
+        console.log(2)
+      }
+      new Foo.getName() 
+      new Foo().getName()
+      // new Foo()的优先级大于new Foo
+    </script>
+  </body>
+</html>
