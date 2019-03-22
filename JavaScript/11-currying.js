@@ -17,4 +17,29 @@ function createCurry(func, args) {
   }
 }
 
+function multiply(a, b, c) {
+  return a * b * c
+}
 
+// 编写可以轻松复用和配置的小代码块
+
+// e:你有一家商店，然后你想给你的优惠顾客10%的折扣：
+// function discount(price, duscount) {
+//   return price * discount
+// }
+// 柯里化之后
+function discount(discount){
+  return price => price * discount
+}
+
+const tenPercentDiscount = discount(0.1)
+console.log(tenPercentDiscount(500))
+console.log(tenPercentDiscount(300))
+const twentyPercentDiscount = discount(0.2)
+console.log(twentyPercentDiscount(500))
+console.log(twentyPercentDiscount(300))
+
+function currying(fn) {
+  var args = []
+  
+}
