@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./index.js"></script>
+    <script>
+      var callback = function(newVal, oldVal) {
+        // alert(newVal)
+        console.log('新值：' + newVal + '----' + '旧值：' + oldVal) ;
+      }
+      var data = {
+        a: 200,
+        level1: {
+          b: 'str',
+          c: [1, 2, 3],
+          level2: {
+            d: 90
+          }
+        }
+      }
+      var j = new Jsonob(data, callback)
+
+      // data.a = 250
+      // data.a = 260
+      // j.overrideArrayProto()
+      data.level1.c.push(4)
+    </script>
+  </body>
+</html>

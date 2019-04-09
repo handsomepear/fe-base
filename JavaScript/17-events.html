@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="mode">Mode</div>
+  <script>
+    // window.addEventListener('click', e => {
+    //   console.log('window')
+    // }, false)
+    mode.addEventListener('click', e => {
+      e.stopImmediatePropagation() // 只会触发冒泡 不会触发捕获
+      console.log('冒泡');
+    }, false)
+    mode.addEventListener('click', e=> {
+      console.log('捕获')
+    }, {
+      capture: false, // 是否捕获
+      once: true, // 只触发一次
+      passive: true // 表示永远不会调用 preventDefault
+    })
+  </script>
+</body>
+</html>
