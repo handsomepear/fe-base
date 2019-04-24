@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,43 @@
   <!-- <script src='./19-array-flat.js'></script> -->
   <!-- <script src="./20-array-distinct.js"></script> -->
   <!-- <script src="./21-array-sort.js"></script> -->
-  <script src="./22-array-max.js"></script>
+  <!-- <script src="./22-array-max.js"></script> -->
+  <!-- <script src="./23-listClass.js"></script> -->
 </head>
+
 <body>
-  
+  <script>
+  // var startDate = new Date('2019/4/9 00:00:00').getTime()
+  // var endDate = new Date('2019/4/12 24:00:00').getTime()
+  // var now = new Date().getTime()
+  // // alert(startDate)
+  // var arr = [1,2,3,4]
+  // delete arr[1]
+  // console.log(arr) 
+  // let a = 2
+  // let a = 3 //  不可重复声明
+  // console.log(a)
+  const list = [{
+  	maxReimburseAmount: 10,
+  	taskName: 'hello'
+  },
+  {
+  	maxReimburseAmount: 20,
+  	taskName: 'hi'
+  },{
+  	maxReimburseAmount: 30,
+  	taskName: 'heihei'
+  }]
+
+  const taskName = list.map(item => {
+  	return item.taskName
+  })
+  console.log(taskName)
+  const max = list.reduce((total, current) => {
+  	return total + current.maxReimburseAmount
+  }, 0)
+  console.log(max)
+  </script>
 </body>
+
 </html>

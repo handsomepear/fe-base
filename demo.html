@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #box {
+      width: 300px;
+      height: 300px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box" contenteditable="true">hello</div>
+  <button id="btn">插入文本</button>
+  <input type="text" id="input">
+  <script>
+    const input = document.querySelector('#input')
+    const box = document.querySelector('#box')
+    const btn = document.querySelector('#btn')
+    console.log(btn)
+    btn.onclick = function () {
+      var str = input.value || '<mark>我是插入的内容</mark>'
+      box.focus()
+      _insert(str)
+    }
+
+    function _insert(nodeStr) {
+      var selection = window.getSelection ? window.getSelection() : document.selection
+      var range = selection.createRange ? selection.createRange() : selection.getRangeAt(0)
+      var node = range.createContextualFragment(nodeStr) // 解析字符串 返回 documentFragment
+      range.insertNode(node)
+    }
+  </script>
+</body>
+
+</html>

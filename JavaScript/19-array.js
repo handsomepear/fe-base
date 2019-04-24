@@ -10,7 +10,6 @@ console.log([1,[2,3,[4,5]]].flat(3)) // [1, 2, 3, 4, 5]
 var ret2 = [1,[2,3,[4,5],[6,7]]].flat(Infinity) // 使用 infinity 可以展开任意维度的数组
 console.log(ret2) // [1, 2, 3, 4, 5, 6, 7]
 
-// 开始篇 利用递归和数组合并方法 concat 实现扁平
 function flatten(arr) {
   while(arr.some(item => Array.isArray(item))) {
     // concat 可以接受多个参数 可以是任意类型 如果是数组的话 会被展开合并
