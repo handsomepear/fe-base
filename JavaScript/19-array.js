@@ -44,3 +44,21 @@ function falltenNormal(input) {
 }
 
 console.log(falltenNormal(arr1))
+
+let arr = [1,2,3,4]
+arr.forEach(item => {
+  item *= 10
+})
+console.log(arr) // [1,2,3,4] 未改变数组
+
+// 直接操作数组
+arr.forEach(item => {
+  item[1] = 10
+})
+
+// 复杂数据类型
+let arr2 = [{name: 'Vue'}, {age: 20}]
+arr2.forEach(item => {
+  item.name = 10
+})
+console.log(arr2) // [{name: '10'},{name:10 age: 20}]
