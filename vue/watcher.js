@@ -9,6 +9,7 @@ export default class Watcher {
     this.run()
   }
   run(){
+    // 其实
     const value = this.get()
     if(value !== this.value) {
       this.value = value

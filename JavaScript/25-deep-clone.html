@@ -10,39 +10,57 @@
 
 <body>
   <script>
-    function deepClone(obj, parent = null) {
-      // 创建一个新对象
-      let result = {}
-      let keys = Object.keys(obj),
-        key = null,
-        temp = null,
-        _parent = parent
-      while (_parent) {
-        // 如果该字段引用了他的父级则为循环引用
-        if (_parent.originalParent === obj) {
-          return _parent.currentParent
-        }
-        _parent = _parent.parent
+  function deepClone(obj, parent = null) {
+    // 创建一个新对象
+    let result = {}
+    let keys = Object.keys(obj),
+      key = null,
+      temp = null,
+      _parent = parent
+    while (_parent) {
+      // 如果该字段引用了他的父级则为循环引用
+      if (_parent.originalParent === obj) {
+        return _parent.currentParent
       }
-      for (let i = 0; i < keys.length; i++) {
-        key = keys[i]
-        temp = obj[key]
-        // 如果字段的值也是一个对象
-        if (temp && typeof temp === 'object') {
-          // 递归执行深拷贝 将同级的待拷贝对象与新对象传递给 parent 方便追溯循环引用
-          result[key] = deepClone(temp, {
-            originalParent: obj,
-            currentParent: result,
-            parent: parent
-          })
-        } else {
-          result[key] = temp
-        }
-      }
-      return result
+      _parent = _parent.parent
     }
-    var obj1 = { x: 1, y: 2, o: { z: 3 } }
-    console.log(deepClone(obj1))
+    for (let i = 0; i < keys.length; i++) {
+      key = keys[i]
+      temp = obj[key]
+      // 如果字段的值也是一个对象
+      if (temp && typeof temp === 'object') {
+        // 递归执行深拷贝 将同级的待拷贝对象与新对象传递给 parent 方便追溯循环引用
+        result[key] = deepClone(temp, {
+          originalParent: obj,
+          currentParent: result,
+          parent: parent
+        })
+      } else {
+        result[key] = temp
+      }
+    }
+    return result
+  }
+  var obj1 = { x: 1, y: 2, o: { z: 3 } }
+  console.log(deepClone(obj1))
+  </script>
+  <script>
+  function deep(obj) {
+    let result = Array.isArray(obj) ? [] : {}
+
+    for(let key in obj){
+      if(obj.hasOwnProperty(key)){
+        result[key] = typeof obj[key] === 'object' ? deep(obj[key]) : obj[key]
+      }
+    }
+    return result
+  }
+
+  var o = { a: 1, b: { c: 2 }, d: [1, 2, 3] }
+  var oc = deep(o)
+  o.b.c = 3
+  o.d.push(4)
+  console.log(oc)
   </script>
 </body>
 

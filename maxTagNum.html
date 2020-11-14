@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function getMaxTagName() {
+      var allTagList = Array.from(document.querySelectorAll('*')).map(item => item.tagName)
+      var tabNumObj = {}
+      allTagList.forEach(item => {
+        if (item in tabNumObj) {
+          tabNumObj[item]++
+        } else {
+          tabNumObj[item] = 1
+        }
+      })
+      return Math.max.apply(null, Object.values(tabNumObj))
+    }
+
+    console.log(getMaxTagName())
+
+  </script>
+</body>
+
+</html>

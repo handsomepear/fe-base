@@ -39,7 +39,5 @@ const twentyPercentDiscount = discount(0.2)
 console.log(twentyPercentDiscount(500))
 console.log(twentyPercentDiscount(300))
 
-function currying(fn) {
-  var args = []
-  
-}
+
+function composite()
